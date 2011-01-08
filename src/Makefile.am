@@ -1,9 +1,9 @@
 
 SUBDIRS  = misc http_server sqlclient
 
-AM_CPPFLAGS =@LIBXML2_CFLAGS@ @LIBSOUP_CFLAGS@ @GLIB2_CFLAGS@ -I$(srcdir)/http_server
+AM_CPPFLAGS = @NEED_ALL_CFLAGS@  -I$(srcdir)/http_server
 
-LIBS += @LIBXML2_LIBS@ @LIBSOUP_LIBS@ @GLIB2_LIBS@ @SQLITE_LIBS@
+LIBS += @NEED_ALL_LIBS@ 
 
 STATIC_LIBS =  $(builddir)/http_server/libhttp_server.a $(builddir)/misc/libmisc.a	\
 						$(builddir)/sqlclient/libsqlclient.a

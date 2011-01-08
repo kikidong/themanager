@@ -35,6 +35,8 @@
 #include "global.h"
 #include "htmlnode.h"
 #include "html_paths.h"
+#include <libnotify/notify.h>
+
 
 static void SoupServer_path_root(SoupServer *server, SoupMessage *msg,
 		const char *path, GHashTable *query, SoupClientContext *client,
@@ -53,6 +55,15 @@ int start_server(guint port)
 		g_warning(_("server failt to start at port %d, will use random port!"),port);
 		port = 0;
 	}
+
+	char * notifybody = g_strdup_printf(_("server started at port %u"),soup_server_get_port(server));
+
+	NotifyNotification * notify = notify_notification_new("server started",notifybody,NULL,NULL);
+
+	notify_notification_show(notify,0);
+
+	g_object_unref(notify);
+	g_free(notifybody);
 
 	g_debug(_("server started at port %u"),soup_server_get_port(server));
 

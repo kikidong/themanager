@@ -36,7 +36,6 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <libsoup/soup.h>
-#include <sqlite3.h>
 
 #include "http_server.h"
 #include "global.h"
@@ -49,9 +48,40 @@ void SoupServer_path_stulist(SoupServer *server, SoupMessage *msg,
 		gpointer user_data)
 {
 
+	if(!g_sql_connect_run_query(dbclient,"SELECT * from student",-1));
+	{
+		soup_message_set_status(msg,SOUP_STATUS_BAD_REQUEST);
+		return ;
+	}
+
+	HtmlNode * html = htmlnode_new(NULL,"html",NULL);
+
+	htmlnode_new_head(html,"http-equiv=\"content-type\"","content=\"text/html;charset=utf-8\"",NULL);
 
 
+
+
+	GSQLResult * result = g_sql_connect_use_result(dbclient);
+
+	if(result) //数据库有内容
+	{
+		//循环获得每一行
+		while(g_sql_result_get_row(result))
+		{
+			//构建页面
+
+			const gchar * ID = g_sql_result_colum_by_name(result,"ID");
+
+
+
+		}
+	}
 
 
 	soup_message_set_status(msg,SOUP_STATUS_OK);
+
+	htmlnode_to_plane_text_and_free(html,
+			(htmlnode_appender) soup_message_body_appender, msg->response_body);
+
+	soup_message_body_complete(msg->response_body);
 }
