@@ -25,7 +25,6 @@
 #endif
 
 #include <unistd.h>
-#include <sys/resource.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -70,6 +69,9 @@ int start_server()
 	soup_server_add_handler(server,"/favicon.ico",SoupServer_path_static_file,NULL,NULL);
 
 	soup_server_add_handler(server,"/",SoupServer_path_root,NULL,NULL);
+
+	soup_server_add_handler(server,"/stulist",SoupServer_path_stulist,NULL,NULL);
+
 
 	soup_server_run_async(server);
 

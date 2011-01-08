@@ -42,6 +42,7 @@ libhttp_server_a_SOURCES += htmlnode.c htmlnode.h
 libhttp_server_a_SOURCES += html_paths.h
 libhttp_server_a_SOURCES += html_path_static_file.c
 libhttp_server_a_SOURCES += html_path_404.c
+libhttp_server_a_SOURCES += html_path_stulist.c
 
 
 libhttp_server_a_DEPENDENCIES = sym_404.h resource.o

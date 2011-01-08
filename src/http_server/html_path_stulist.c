@@ -1,5 +1,9 @@
 /*
- * html_paths.h -- 定义各个路径处理函数
+ * html_path_stulist.c  --
+ *
+ *
+ * 		动态创建学生列表。
+ *
  *
  *      Copyright 2010 薇菜工作室
  *
@@ -17,33 +21,37 @@
  *      along with this program; if not, write to the Free Software
  *      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  *      MA 02110-1301, USA.
+ *
  */
 
-#ifndef HTML_PATHS_H_
-#define HTML_PATHS_H_
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
 
+#include <unistd.h>
+#include <sys/resource.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <glib.h>
+#include <glib/gi18n.h>
 #include <libsoup/soup.h>
+#include <sqlite3.h>
 
-G_BEGIN_DECLS
+#include "http_server.h"
+#include "global.h"
+#include "htmlnode.h"
+#include "html_paths.h"
 
-void soup_message_body_appender(const gchar * txt, SoupMessageBody * body) G_GNUC_INTERNAL;
-
-void SoupServer_path_root_icon(SoupServer *server, SoupMessage *msg,
-		const char *path, GHashTable *query, SoupClientContext *client,
-		gpointer user_data) G_GNUC_INTERNAL;
-
-void SoupServer_path_404(SoupServer *server, SoupMessage *msg,const char *path,
-		GHashTable *query, SoupClientContext *client,gpointer user_data)G_GNUC_INTERNAL;
-
-void SoupServer_path_static_file(SoupServer *server, SoupMessage *msg,
-		const char *path, GHashTable *query, SoupClientContext *client,
-		gpointer user_data) G_GNUC_INTERNAL;
 
 void SoupServer_path_stulist(SoupServer *server, SoupMessage *msg,
 		const char *path, GHashTable *query, SoupClientContext *client,
-		gpointer user_data) G_GNUC_INTERNAL;
+		gpointer user_data)
+{
 
-G_END_DECLS
 
-#endif /* HTML_PATHS_H_ */
+
+
+
+	soup_message_set_status(msg,SOUP_STATUS_OK);
+}

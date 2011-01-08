@@ -33,8 +33,9 @@ PKG_CHECK_MODULES(ZLIB,zlib)
 PKG_CHECK_MODULES(LIBXML2,libxml-2.0)
 PKG_CHECK_MODULES(GLIB2,glib-2.0 gobject-2.0)
 PKG_CHECK_MODULES(LIBSOUP,libsoup-2.4)
+PKG_CHECK_MODULES(SQLITE,sqlite3)
 
-PKG_CHECK_MODULES(NEED_ALL,libsoup-2.4 glib-2.0 gobject-2.0 zlib libxml-2.0)
+PKG_CHECK_MODULES(NEED_ALL,libsoup-2.4 glib-2.0 gobject-2.0 zlib libxml-2.0 sqlite3)
 AC_CONFIG_FILES(Makefile
 	src/Makefile
 	src/http_server/Makefile

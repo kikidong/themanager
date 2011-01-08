@@ -2,7 +2,7 @@
  <head>
   <meta http-equiv="content-type" content="text/html;charset=utf-8" />
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"></link>
-  <title>登录以使用网络</title>
+  <title>学生管理系统</title>
   <script language="javascript">
 	<!--
 	function btClick()
@@ -28,27 +28,10 @@
 </script>
  </head>
  <body>
-  <table align="center" width="100%" >
-	<tr>
-		<td>
-		<iframe frameborder="0"  src="whyverifyyou.html" width="100%" name="shitwords"></iframe>
-		</td>
-	</tr>
-	<tr>
-	<td width="70%">
-		<iframe frameborder="0"  src="getcode.html" width="50%" id="getcode" name="getcode" onload="getchildcodename()"></iframe>
-		<button type="button" onclick=refreshcode()>重新获得验证码</button>
-	</td>
-	</tr>
-  </table>
-  <form method="POST" action="/login.monitor" id="loginform" name="loginform" target="loginwin">
-   <table border="0" align="center">
-    <tr>
-     <td><input type="hidden" name="codename" id="codename"/>
-      <input type="submit" value="验证" name="Submit" onclick="btClick()"/>
-     </td>
-    </tr>
-   </table>
-  </form>
+	<frameset cols="25%,75%">
+		<frame src="stulist" />
+		<frame src=""/>
+	</frameset>
+	It works!
  </body>
 </html>
