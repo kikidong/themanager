@@ -12,7 +12,8 @@
 #include <glib.h>
 #include <glib-object.h>
 #include <libsoup/soup.h>
-#include <sqlite3.h>
+#include "sqlclient/gsqlconnect.h"
+#include "sqlclient/gsqlresult.h"
 
 #include "global.h"
 #include "http_server.h"
@@ -29,14 +30,17 @@ int main(int argc, char* argv[])
 
 	//打开数据库
 
-	sqlite3_open(PACKAGE_NAME ".sqlite",&db);
+	dbclient = sqlconnect_new();
 
-	start_server();
+
+	//检查数据库内容
+
+	start_server(8000);
 	/*主循环*/
 	GMainLoop * loop = g_main_loop_new(g_main_context_default(),0);
 	g_main_loop_run(loop);
 	return 0;
 }
 
-sqlite3	* db;
+GSQLConnect	* dbclient;
 GKeyFile * gkeyfile = NULL;

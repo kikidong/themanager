@@ -39,6 +39,7 @@ PKG_CHECK_MODULES(NEED_ALL,libsoup-2.4 glib-2.0 gobject-2.0 zlib libxml-2.0 sqli
 AC_CONFIG_FILES(Makefile
 	src/Makefile
 	src/http_server/Makefile
-	src/misc/Makefile)
+	src/misc/Makefile
+	src/sqlclient/Makefile)
 AC_OUTPUT
 

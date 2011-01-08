@@ -1,5 +1,5 @@
 /*
- * http_server.h -- HTTP 服务器
+ * sqlbackend.c
  *
  *      Copyright 2010 薇菜工作室
  *
@@ -19,18 +19,20 @@
  *      MA 02110-1301, USA.
  */
 
-#ifndef HTTP_SERVER_H_
-#define HTTP_SERVER_H_
-
-#ifdef __cplusplus
-extern "C" {
+#ifdef HAVE_CONFIG_H
+#include <config.h>
 #endif
 
-int start_server(guint);
 
-#ifdef __cplusplus
+#include <glib/gi18n.h>
+#include "gsqlconnect.h"
+#ifdef WITH_MYSQL
+#include "gsqlconnect_mysql.h"
+#endif
+#include "gsqlconnect_sqlite3.h"
+#include "global.h"
+
+GSQLConnect *  sqlconnect_new()
+{
+	return g_object_new(G_TYPE_SQL_CONNNECT_SQLITE,0);
 }
-#endif
-
-
-#endif /* HTTP_SERVER_H_ */

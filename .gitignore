@@ -43,3 +43,4 @@ src/marshller.c
 Themanager
 *.xml
 *.zip
+*.sqlite

@@ -21,6 +21,7 @@
 #include <stdio.h>
 #include <string.h>
 
+//获得扩展名
 const char * getext(const char * name)
 {
 	const char * p = name + strlen(name);
@@ -29,6 +30,7 @@ const char * getext(const char * name)
 	return p + 1;
 }
 
+//通过文件名来识别文件的 MIME 类型
 const char * getmime_by_filename(const char * filename)
 {
 //	char line[200];

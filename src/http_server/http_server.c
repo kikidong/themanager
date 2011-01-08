@@ -42,19 +42,9 @@ static void SoupServer_path_root(SoupServer *server, SoupMessage *msg,
 
 static SoupServer * server;
 
-int start_server()
+int start_server(guint port)
 {
 	GError * err = NULL;
-
-	g_assert(gkeyfile);
-
-	int port = g_key_file_get_integer(gkeyfile,"http","port",&err);
-	if(err)
-	{
-		port = 8000;
-		g_error_free(err);
-		g_warning(_("using port %d as default duto the missing [http]:[port] settings"),port);
-	}
 
 	while (!(server = soup_server_new(SOUP_SERVER_ASYNC_CONTEXT,
 			g_main_context_get_thread_default(), "port", port,

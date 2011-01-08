@@ -7,11 +7,11 @@
 
 #ifndef GLOBAL_H_
 #define GLOBAL_H_
-#include <sqlite3.h>
+
+#include "sqlclient/gsqlconnect.h"
 
 
+extern GSQLConnect	* dbclient;
 extern GKeyFile * gkeyfile;
-extern sqlite3	* db;
-
 
 #endif /* GLOBAL_H_ */
