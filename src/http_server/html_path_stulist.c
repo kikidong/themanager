@@ -65,8 +65,22 @@ void SoupServer_path_stulist(SoupServer *server, SoupMessage *msg,
 
 	HtmlNode * body_div = htmlnode_new(body,"div",0);
 
+	HtmlNode * body_div_table = htmlnode_new(body_div,"table",0);
+
+	HtmlNode * tr = htmlnode_new(body_div_table,"tr",0);
+
+	htmlnode_new_text_printf(htmlnode_new(tr,"td",0),"%s","专业");
+	htmlnode_new_text_printf(htmlnode_new(tr,"td",0),"%s","班级");
+	htmlnode_new_text_printf(htmlnode_new(tr,"td",0),"%s","学号");
+	htmlnode_new_text_printf(htmlnode_new(tr,"td",0),"%s","姓名");
+
+	htmlnode_new(body_div,"br",0);
+
 	if(result) //数据库有内容
 	{
+		g_object_ref(result);
+		tr = htmlnode_new(body_div_table,"tr",0);
+
 		//循环获得每一行
 		while(g_sql_result_fetch_row(result))
 		{
@@ -81,13 +95,38 @@ void SoupServer_path_stulist(SoupServer *server, SoupMessage *msg,
 			const gchar * class = g_sql_result_colum_by_name(result,"class");
 
 
-			htmlnode_new_text_printf(htmlnode_new(body_div,"b"),"%s",mj);
-			htmlnode_new_text_printf(htmlnode_new(body_div,"b"),"%s",class);
-			htmlnode_new_text_printf(htmlnode_new(body_div,"b"),"%s",ID);
-			htmlnode_new_text_printf(htmlnode_new(body_div,"b"),"%s",name);
+			htmlnode_new_text_printf(htmlnode_new(tr,"td",0),"%s",mj);
+			htmlnode_new_text_printf(htmlnode_new(tr,"td",0),"%s",class);
+			htmlnode_new_text_printf(htmlnode_new(tr,"td",0),"%s",ID);
+			htmlnode_new_text_printf(htmlnode_new(tr,"td",0),"%s",name);
 
-			htmlnode_new(body_div,"br");
+
+			//有成绩嘛就显示成绩
+
+			gchar * sql ;
+			GSQLResult * res;
+
+			sql = g_strdup_printf("select * from lesson where stuid='%s'",ID);
+
+			g_sql_connect_run_query(dbclient,sql,-1);
+
+			if((res =g_sql_connect_use_result(dbclient)))
+			{
+				while(g_sql_result_fetch_row(res))
+				{
+					htmlnode_new_text_printf(htmlnode_new(tr,"td",0),"科目:%s	分数:%s",
+							g_sql_result_colum_by_name(res,"name"),g_sql_result_colum_by_name(res,"score"));
+				}
+				g_object_unref(res);
+			}
+
+			g_free(sql);
+
+			tr = htmlnode_new(body_div_table,"tr",0);
 		}
+
+
+		g_object_unref(result);
 	}
 
 

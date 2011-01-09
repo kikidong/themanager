@@ -57,8 +57,8 @@ void SoupServer_path_input_student_info(SoupServer *server, SoupMessage *msg,
 
 	ID = g_hash_table_lookup(query,"stuid");
 	name = g_hash_table_lookup(query,"name");
-	class = g_hash_table_lookup(query,"major");
-	mj = g_hash_table_lookup(query,"class");
+	class = g_hash_table_lookup(query,"class");
+	mj = g_hash_table_lookup(query,"major");
 
 	if( !ID )
 	{
