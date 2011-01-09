@@ -196,6 +196,10 @@ const gchar* g_sql_result_colum(GSQLResult * obj,const guint index)
 	return obj->currow[index];
 }
 
+const gchar* g_sql_result_colum_name(GSQLResult * obj,const guint index)
+{
+	return (char*)g_ptr_array_index(obj->colum,index);
+}
 /**
  * g_sql_result_colum_by_name:
  * @obj:

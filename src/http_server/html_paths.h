@@ -44,6 +44,10 @@ void SoupServer_path_stulist(SoupServer *server, SoupMessage *msg,
 		const char *path, GHashTable *query, SoupClientContext *client,
 		gpointer user_data) G_GNUC_INTERNAL;
 
+void SoupServer_path_search(SoupServer *server, SoupMessage *msg,
+		const char *path, GHashTable *query, SoupClientContext *client,
+		gpointer user_data) G_GNUC_INTERNAL;
+
 void SoupServer_path_input_student_info(SoupServer *server, SoupMessage *msg,
 		const char *path, GHashTable *query, SoupClientContext *client,
 		gpointer user_data) G_GNUC_INTERNAL;

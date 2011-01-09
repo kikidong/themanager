@@ -66,5 +66,7 @@ void	g_sql_result_set_result_array(GSQLResult * obj , ...  /* const gchar * firs
 void	g_sql_result_append_result_array(GSQLResult * obj, const char * field);
 const gchar* g_sql_result_colum_by_name(GSQLResult * obj,const gchar * columname);
 const gchar* g_sql_result_colum(GSQLResult * obj,const guint index);
+const gchar* g_sql_result_colum_name(GSQLResult * obj,const guint index);
+
 
 #endif /* GSQLRESULT_H_ */

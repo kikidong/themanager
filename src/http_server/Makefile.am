@@ -46,6 +46,7 @@ libhttp_server_a_SOURCES += html_path_stulist.c
 libhttp_server_a_SOURCES += html_path_input_class_info.c
 libhttp_server_a_SOURCES += html_path_dformjs.c
 libhttp_server_a_SOURCES += html_path_input_student_info.c
+libhttp_server_a_SOURCES += html_path_search.c
 
 
 libhttp_server_a_DEPENDENCIES = sym_404.h resource.o

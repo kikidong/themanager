@@ -69,6 +69,8 @@ int start_server(guint port)
 
 	soup_server_add_handler(server,"/stulist",SoupServer_path_stulist,NULL,NULL);
 
+	soup_server_add_handler(server,"/search.html",SoupServer_path_search,NULL,NULL);
+
 	soup_server_run_async(server);
 
 	return soup_server_get_port(server);
