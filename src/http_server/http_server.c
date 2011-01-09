@@ -56,15 +56,6 @@ int start_server(guint port)
 		port = 0;
 	}
 
-	char * notifybody = g_strdup_printf(_("server started at port %u"),soup_server_get_port(server));
-
-	NotifyNotification * notify = notify_notification_new("server started",notifybody,NULL,NULL);
-
-	notify_notification_show(notify,0);
-
-	g_object_unref(notify);
-	g_free(notifybody);
-
 	g_debug(_("server started at port %u"),soup_server_get_port(server));
 
 	soup_server_add_handler(server,"/favicon.ico",SoupServer_path_static_file,NULL,NULL);
@@ -73,6 +64,7 @@ int start_server(guint port)
 
 	soup_server_add_handler(server,"/stulist",SoupServer_path_stulist,NULL,NULL);
 
+	soup_server_add_handler(server,"/input_class_info",SoupServer_path_input_class_info,0,0);
 
 	soup_server_run_async(server);
 

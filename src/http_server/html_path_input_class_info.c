@@ -1,11 +1,9 @@
 /*
- * html_path_stulist.c  --
+ * html_path_input_class_info.c
  *
+ * 	这个文件用来接受课程的输入
  *
- * 		动态创建学生列表。
- *
- *
- *      Copyright 2010 薇菜工作室
+ *      Copyright 2011 薇菜工作室
  *
  *      This program is free software; you can redistribute it and/or modify
  *      it under the terms of the GNU General Public License as published by
@@ -36,53 +34,50 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <libsoup/soup.h>
-
 #include "http_server.h"
 #include "global.h"
 #include "htmlnode.h"
 #include "html_paths.h"
 
-
-void SoupServer_path_stulist(SoupServer *server, SoupMessage *msg,
+void SoupServer_path_input_class_info(SoupServer *server, SoupMessage *msg,
 		const char *path, GHashTable *query, SoupClientContext *client,
 		gpointer user_data)
 {
+	const gchar * classname;
 
-	if(!g_sql_connect_run_query(dbclient,"SELECT * from student",-1));
+	//接收用户的输入
+	classname = g_hash_table_lookup(query,"classname");
+
+	if(classname  && g_utf8_strlen(classname,512))
 	{
-		soup_message_set_status(msg,SOUP_STATUS_BAD_REQUEST);
-		return ;
-	}
+		g_debug("课程名:%s",classname);
 
-	HtmlNode * html = htmlnode_new(NULL,"html",NULL);
+		gchar * sql = g_strdup_printf("select * from lesson where name='%s'",classname);
 
-	htmlnode_new_head(html,"http-equiv=\"content-type\"","content=\"text/html;charset=utf-8\"",NULL);
-
-
-
-
-
-	GSQLResult * result = g_sql_connect_use_result(dbclient);
-
-	if(result) //数据库有内容
-	{
-		//循环获得每一行
-		while(g_sql_result_get_row(result))
+		if( g_sql_connect_run_query(dbclient,sql,-1))
 		{
-			//构建页面
+			//已经存在这样的表格了
+			if(g_sql_connect_use_result(dbclient))
+			{
+				g_free(sql);
+				//返回已经存在的页面
+				return SoupServer_path_static_file(server,msg,"/classnameexist.html",query,client,user_data);
+			}
 
-			const gchar * ID = g_sql_result_colum_by_name(result,"ID");
+			//把课程存入数据库
+			gchar * sql = g_strdup_printf("insert into lesson (name) VALUES ('%s')",classname);
 
+			if( g_sql_connect_run_query(dbclient,sql,-1))
+			{
+				g_free(sql);
 
+				g_debug("已经存入数据库");
 
+				return SoupServer_path_static_file(server,msg,"/class.html",query,client,user_data);
+			}
+			g_free(sql);
 		}
+		g_free(sql);
 	}
-
-
-	soup_message_set_status(msg,SOUP_STATUS_OK);
-
-	htmlnode_to_plane_text_and_free(html,
-			(htmlnode_appender) soup_message_body_appender, msg->response_body);
-
-	soup_message_body_complete(msg->response_body);
+	return SoupServer_path_404(server,msg,path,query,client,user_data);
 }

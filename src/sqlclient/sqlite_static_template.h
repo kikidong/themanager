@@ -43,7 +43,7 @@ static const char * create_sql[] =
 		"  `nIndex` INTEGER PRIMARY KEY AUTOINCREMENT,"	//ID
 		"	`name`	TEXT ,"						//课程名
 		"	`score`	TEXT ,"						//成绩
-		"	`stuid`	TEXT	"						//课程所有人的学号
+		"	`stuid`	TEXT	"						//课程所有人的学号 NULL 是课程模板
 		") ",
 };
 
