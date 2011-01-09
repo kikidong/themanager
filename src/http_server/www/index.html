@@ -1,37 +1,8 @@
 <html>
- <head>
-  <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"></link>
-  <title>学生管理系统</title>
-  <script language="javascript">
-	<!--
-	function btClick()
-	{
-		window.open('/login.monitor','loginwin','toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=500,height=300');
-		loginform.action="/login.monitor";
-		
-		loginform.submit();
-	}
-	
-	function refreshcode()
-	{
-		window.frames["getcode"].location.reload();
-	}
-	
-	function getchildcodename()
-	{
-		var childHtml = document.getElementById("getcode").contentWindow;
-		document.getElementById("codename").value = childHtml.document.getElementById("codename").value;
-	}
 
-	//-->
-</script>
- </head>
- <body background="eg_bg_06.gif">
-	<frameset cols="25%,75%">
-		<frame src="stulist" />
-		<frame src=""/>
-	</frameset>
-	It works!
- </body>
+<frameset rows="120,*">
+  <frame src="frame_title.html" noresize="noresize" />
+  <frame src="frame_a.html" name="view_frame">
+</frameset> 
+
 </html>
