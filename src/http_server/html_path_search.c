@@ -46,7 +46,7 @@ void SoupServer_path_search(SoupServer *server, SoupMessage *msg,
 		gpointer user_data)
 {
 	GSQLResult * result;
-
+	gchar * sql=NULL;
 
 
 	HtmlNode * html = htmlnode_new(NULL,"html",NULL);
@@ -67,14 +67,14 @@ void SoupServer_path_search(SoupServer *server, SoupMessage *msg,
 	HtmlNode * body_div = htmlnode_new(body,"div",0);
 
 //	首先获得对于的SQL语句
-	gchar * sql = g_hash_table_lookup(query,"sql");
+	if(query)
+		sql = g_hash_table_lookup(query,"sql");
 
 	if(sql)
 		sql =  soup_uri_decode(sql);
 
 	if(sql) //执行 SQL 语句
 	{
-
 		gchar * fsql = g_strdup_printf("select %s",sql);
 		g_free(sql);
 		sql = fsql;
