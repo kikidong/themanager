@@ -1,6 +1,11 @@
 <html>
+
+<script language="javascript" type="text/javascript" src="dform.js"></script>
+
 <body background="eg_bg_06.gif">
-<form action="/input" method="post">
+
+
+<form id="input_student_info" action="/" method="GET">
   <table border="1">
 	<tr>
 		<th colspan="2">基本信息</th>
@@ -23,14 +28,15 @@
 	</tr>
 	<tr>
 		<th colspan="2">课程信息</th>
+
 	</tr>
 	<tr>
-    	<th>课程</th>
-		<th>成绩</th>
+    	<th colspan="1">课程</th>
+    	<th>成绩</th>
  	</tr>
-	<tr>
-    	<td>
-		<select>
+ 	<tr></td><td colspan="3">
+ 	<div id="items"> 	
+ 	<b >		<select name="lessname">
  			<optgroup label="Swedish Cars">
     			<option value="volvo">Volvo</option>
     			<option value="saab">Saab</option>
@@ -40,12 +46,12 @@
     			<option value="audi">Audi</option>
   			</optgroup>
 		</select>
-	</td>
-		<td><input type="text" name="score"/></td>
- 	</tr>
-
-</table>
-  
+	</b>
+	<b><input type="text" name="score"/></b>
+	<br />
+		<input type="button" value="再添加一个课程信息" onclick="AddItem();"  id="inputwriteroot" />
+	</div></td></tr>
+</table>  
   <input type="submit" value="提交" />
 </form>
 
