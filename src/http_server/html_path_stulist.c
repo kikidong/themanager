@@ -48,7 +48,7 @@ void SoupServer_path_stulist(SoupServer *server, SoupMessage *msg,
 		gpointer user_data)
 {
 
-	if(!g_sql_connect_run_query(dbclient,"SELECT * from student",-1));
+	if(!g_sql_connect_run_query(dbclient,"SELECT * from student",-1))
 	{
 		soup_message_set_status(msg,SOUP_STATUS_BAD_REQUEST);
 		return ;
@@ -59,27 +59,40 @@ void SoupServer_path_stulist(SoupServer *server, SoupMessage *msg,
 	htmlnode_new_head(html,"http-equiv=\"content-type\"","content=\"text/html;charset=utf-8\"",NULL);
 
 
-
-
-
 	GSQLResult * result = g_sql_connect_use_result(dbclient);
+
+	HtmlNode * body = htmlnode_new_body(html,"background=\"eg_bg_06.gif\"",0);
+
+	HtmlNode * body_div = htmlnode_new(body,"div",0);
 
 	if(result) //数据库有内容
 	{
 		//循环获得每一行
-		while(g_sql_result_get_row(result))
+		while(g_sql_result_fetch_row(result))
 		{
 			//构建页面
 
 			const gchar * ID = g_sql_result_colum_by_name(result,"ID");
 
+			const gchar * name = g_sql_result_colum_by_name(result,"name");
+
+			const gchar * mj = g_sql_result_colum_by_name(result,"mj");
+
+			const gchar * class = g_sql_result_colum_by_name(result,"class");
 
 
+			htmlnode_new_text_printf(htmlnode_new(body_div,"b"),"%s",mj);
+			htmlnode_new_text_printf(htmlnode_new(body_div,"b"),"%s",class);
+			htmlnode_new_text_printf(htmlnode_new(body_div,"b"),"%s",ID);
+			htmlnode_new_text_printf(htmlnode_new(body_div,"b"),"%s",name);
+
+			htmlnode_new(body_div,"br");
 		}
 	}
 
 
 	soup_message_set_status(msg,SOUP_STATUS_OK);
+	soup_message_headers_set_encoding(msg->response_headers,SOUP_ENCODING_CONTENT_LENGTH);
 
 	htmlnode_to_plane_text_and_free(html,
 			(htmlnode_appender) soup_message_body_appender, msg->response_body);

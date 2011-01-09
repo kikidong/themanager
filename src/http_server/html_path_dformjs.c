@@ -53,7 +53,7 @@ char pre_option[] = "var items = 1;"
 char * option = "   newitem += \"<option></option>\";"
 "   newitem += \"<option></option>\";";
 */
-char post_option[]  = "   newitem += \"</select> </b> \";"
+char post_option[]  = "\n\r   newitem += \"</select> </b> \";"
 ""
 "	newitem += \"<b>\";"
 "   newitem += \"<input type=\\\"text\\\" name=\\\"score\" + items + \"\\\"/>\";"
