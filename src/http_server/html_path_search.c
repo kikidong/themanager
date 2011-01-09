@@ -58,10 +58,15 @@ void SoupServer_path_search(SoupServer *server, SoupMessage *msg,
 	//首先是一个输入框
 	HtmlNode * form = htmlnode_new_form(body,"GET","search.html",0);
 
-	HtmlNode * p = htmlnode_new(form,"p",0);
+	HtmlNode * table = htmlnode_new_table(form,"width=\"100%\"",0);
+
+	HtmlNode * table_tr = htmlnode_new(table,"tr",0);
+
+	HtmlNode * p = htmlnode_new(htmlnode_new(table_tr,"td",0),"p",0);
 
 	htmlnode_new_text(p,"Select ");
-	htmlnode_new(p,"input","type=\"text\"","name=\"sql\"",0);
+	htmlnode_new(p,"input","type=\"text\"","name=\"sql\"","size=\"100%\"",0);
+
 	htmlnode_new(p,"input","type=\"submit\"","name=\"执行\"",0);
 
 	HtmlNode * body_div = htmlnode_new(body,"div",0);

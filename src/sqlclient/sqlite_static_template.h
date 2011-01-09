@@ -42,7 +42,7 @@ static const char * create_sql[] =
 		"CREATE TABLE IF NOT EXISTS `lesson` ("
 		"  `nIndex` INTEGER PRIMARY KEY AUTOINCREMENT,"	//ID
 		"	`name`	TEXT ,"						//课程名
-		"	`score`	TEXT ,"						//成绩
+		"	`score`	INTEGER ,"						//成绩
 		"	`stuid`	TEXT	"						//课程所有人的学号 NULL 是课程模板
 		") ",
 };
