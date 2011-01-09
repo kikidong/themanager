@@ -66,6 +66,10 @@ int start_server(guint port)
 
 	soup_server_add_handler(server,"/input_class_info",SoupServer_path_input_class_info,0,0);
 
+	soup_server_add_handler(server,"/dform.js",SoupServer_path_dformjs,0,0);
+
+	soup_server_add_handler(server,"/input_student_info",SoupServer_path_dformjs,0,0);
+
 	soup_server_run_async(server);
 
 	return soup_server_get_port(server);

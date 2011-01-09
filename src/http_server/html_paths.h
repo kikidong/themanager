@@ -48,6 +48,10 @@ void SoupServer_path_input_class_info(SoupServer *server, SoupMessage *msg,
 		const char *path, GHashTable *query, SoupClientContext *client,
 		gpointer user_data) G_GNUC_INTERNAL;
 
+void SoupServer_path_dformjs(SoupServer *server, SoupMessage *msg,
+		const char *path, GHashTable *query, SoupClientContext *client,
+		gpointer user_data) G_GNUC_INTERNAL;
+
 
 G_END_DECLS
 
