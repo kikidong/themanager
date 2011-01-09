@@ -133,6 +133,7 @@ void myLog(const gchar *log_domain, GLogLevelFlags log_level,
 
 	NotifyNotification * notify = notify_notification_new(message_hdr,message,NULL,NULL);
 
+	notify_notification_set_timeout(notify,2000);
 	notify_notification_show(notify,0);
 
 	g_object_unref(notify);
