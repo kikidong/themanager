@@ -90,6 +90,8 @@ void SoupServer_path_search(SoupServer *server, SoupMessage *msg,
 	if(!g_sql_connect_run_query(dbclient,sql,-1))
 	{
 		//输出 SQL 的错误信息
+		htmlnode_new_text_printf(htmlnode_new(body_div,"p",0),"%s","Sql 语句错误");
+
 	}else if((result = g_sql_connect_use_result(dbclient)))
 	{
 		HtmlNode * body_div_table = htmlnode_new(body_div,"table",0);
