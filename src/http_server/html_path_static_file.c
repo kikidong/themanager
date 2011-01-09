@@ -93,7 +93,9 @@ void SoupServer_path_static_file(SoupServer *server, SoupMessage *msg,
 
 						soup_message_headers_set_encoding(msg->response_headers,SOUP_ENCODING_CONTENT_LENGTH);
 						soup_message_headers_set_content_length(msg->response_headers,content_length);
-						soup_message_headers_replace(msg->response_headers,"Content-Encoding","deflate");
+
+						if(ziprec->deflate_type)
+							soup_message_headers_replace(msg->response_headers,"Content-Encoding","deflate");
 
 						soup_message_body_append(msg->response_body,SOUP_MEMORY_STATIC,zipeddata,content_length);
 						soup_message_body_complete(msg->response_body);
