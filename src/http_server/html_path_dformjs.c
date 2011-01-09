@@ -39,7 +39,7 @@
 #include "htmlnode.h"
 #include "html_paths.h"
 
-char pre_option[] = "var items = 1;"
+char pre_option[] = "var items = 0;"
 "function AddItem() {"
 "   if (!document.getElementById) return;"
 ""
@@ -47,7 +47,7 @@ char pre_option[] = "var items = 1;"
 "   button = document.getElementById(\"inputwriteroot\");"
 "   items++;"
 ""
-"   newitem = \"<b ><select name=\\\"lessname\\\">\";"
+"   newitem = \"<b ><select name=\\\"lessname\" + items + \"\\\" >\"; "
 "";
 /*
 char * option = "   newitem += \"<option></option>\";"
